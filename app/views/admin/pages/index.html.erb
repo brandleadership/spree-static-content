@@ -26,6 +26,7 @@
 			</td>
 			<td>
 	          <%=link_to t("edit"), edit_object_url(page) %> |
+              <%=link_to t("ext_static_content_new_sub_page"), new_object_url(page.slug) %> |
 	          <%=link_to t("delete"), object_url(page), :method => :delete, :confirm=> t("ext_static_content_confirm_delete") %>
 	        </td>
 		</tr>
@@ -34,3 +35,11 @@
 </table>
 
 <%= link_to t("ext_static_content_new_page"), new_object_url %>
+
+<style type="text/css">
+<!--
+#content.with-sidebar { background: none white; padding-right: 0px; }
+#sidebar { display: none; }
+table.admin-report { padding-right: 10px; }
+-->
+</style>
