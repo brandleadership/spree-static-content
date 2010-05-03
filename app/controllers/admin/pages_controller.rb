@@ -18,4 +18,7 @@ class Admin::PagesController < Admin::BaseController
     Rails.cache.delete('page_not_exist/'+@page.slug)
   end
 
+  def new_sub
+    @parent_page = Page.find(params[:id])
+  end
 end
