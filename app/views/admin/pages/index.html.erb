@@ -11,7 +11,7 @@
   	</thead>
 	
 	<tbody>
-    	<% @pages.each do |page| %>
+    	<% sorted_pages.each do |page| %>
 		<tr class="<%= cycle('even', 'odd') %>">
 			<td>
 				<%= page.title %>
