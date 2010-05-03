@@ -33,7 +33,11 @@
   </tr>
   <tr>
     <td valign="top"><%=t("ext_static_content_slug")%>:</td>
-    <td><%= f.text_field :slug, {"style" => "width:500px", "readonly" => "readonly"} %></td>
+    <% if @parent_page %>
+        <td><%= f.text_field :slug, {"style" => "width:500px", "readonly" => "readonly", :value => @parent_page.slug+"/..."} %></td>
+    <% else %>
+        <td><%= f.text_field :slug, {"style" => "width:500px", "readonly" => "readonly"} %></td>
+    <% end %>
   </tr>
   <tr>
     <td valign="top"><%=t("ext_static_content_body")%>:</td>
@@ -73,6 +77,6 @@
   </tr>
   <tr>
     <td valign="top"><%=t("ext_static_content_visible")%>:</td>
-    <td><%= f.check_box :visible %></td>
+    <td><%= f.check_box :visible, { :checked => 'checked' } %></td>
   </tr>
 </table>
