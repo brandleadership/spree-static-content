@@ -9,8 +9,10 @@ class StaticContentExtension < Spree::Extension
   def activate
 
     Spree::BaseController.class_eval do
+      # PagesHelper for navigations etc.
+      helper PagesHelper
       # ProductsHelper needed for seo_url method used when generating
-      # taxonomies partial in content/show.html.erb.
+      # taxonomies partial in content/show.haml.
       helper :products
       # Use before_filter instead of prepend_before_filter to ensure that
       # ApplicationController filters that the view may require are run.
