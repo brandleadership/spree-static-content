@@ -1,6 +1,8 @@
 class Page < ActiveRecord::Base
   default_scope :order => "position ASC"
 
+  has_many :pages
+
   validates_presence_of :title
   validates_presence_of :body, :if => :not_using_foreign_link?
 
