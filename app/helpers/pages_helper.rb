@@ -16,4 +16,8 @@ module PagesHelper
     page.slug.eql?request.env["PATH_INFO"]
   end
 
+  def static_content_current_page_in_path?(page)
+    request.env["PATH_INFO"].include?page.slug
+  end
+
 end
