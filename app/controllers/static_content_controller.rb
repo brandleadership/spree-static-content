@@ -2,7 +2,7 @@ class StaticContentController < Spree::BaseController
   caches_action :show
 
   def index
-    unless @page = Page.visible.find_by_slug(root_path)
+    unless @page = Page.visible.find_by_slug(root_slug)
       render :file => "#{RAILS_ROOT}/public/404.html", :layout => false, :status => 404
     end
   end
@@ -14,8 +14,10 @@ class StaticContentController < Spree::BaseController
   end
   
   private
-  def root_path
-    @page = Page.find(:first, :root_page => 1)  
+  def root_slug
+    page = Page.find_by_root_page(1)
+
+    page.slug if page
   end
 
   def path
