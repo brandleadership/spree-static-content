@@ -3,8 +3,8 @@
 
 class StaticContentExtension < Spree::Extension
   version "0.1"
-  description "Static content extension for managing static content."
-  url "http://github.com/PeterBerkenbosch/spree-static-content"
+  description "Static content extension for managing static content, with some cms features"
+  url "http://github.com/screenconcept/spree-static-content"
 
   def activate
 
