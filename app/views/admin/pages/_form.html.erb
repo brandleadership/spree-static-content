@@ -55,6 +55,7 @@
     <td valign="top"><%=t("ext_static_content_meta_description")%>:</td>
     <td><%= f.text_field :meta_description, {"style" => "width:500px"} %></td>
   </tr>
+  <% unless @parent_page %>
   <tr>
     <td valign="top"><%=t("ext_static_content_show_in_sidebar")%>:</td>
     <td><%= f.check_box :show_in_sidebar %></td>
@@ -75,6 +76,7 @@
     <td valign="top"><%=t("ext_static_content_root_page")%>:</td>
     <td><%= f.check_box :root_page %></td>
   </tr>
+  <% end %>
   <tr>
     <td valign="top"><%=t("ext_static_content_position")%>:</td>
     <td><%= f.text_field :position %></td>
