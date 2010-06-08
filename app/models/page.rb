@@ -1,8 +1,8 @@
 class Page < ActiveRecord::Base
   default_scope :order => "position ASC"
 
-  has_many :pages, :dependent => :destroy
-  belongs_to :page
+  has_one :parent_page, :foreign_key => 'parent_page_id', :class_name => 'Page'
+  has_one :page, :through => :parent_page
 
   validates_presence_of :title
   validates_presence_of :body, :if => :not_using_foreign_link?
@@ -42,6 +42,10 @@ class Page < ActiveRecord::Base
     else
       foreign_link.blank? ? Page.find(self.parent_page_id).link + slug_link : foreign_link
     end
+  end
+
+  def sub_pages
+    Page.find(:all, :conditions => ["parent_page_id = ?", self.id])
   end
 
 private
