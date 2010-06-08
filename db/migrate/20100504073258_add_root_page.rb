@@ -1,7 +1,7 @@
 class AddRootPage < ActiveRecord::Migration
   def self.up
     change_table :pages do |t|
-      t.boolean :root_page, :default=> false, :null=>false
+      t.boolean :root_page, :default => false, :null => false
     end
   end
 
