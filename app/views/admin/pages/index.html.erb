@@ -6,6 +6,7 @@
       		<th><%=t("ext_static_content_title")%></th>
       		<th><%=t("ext_static_content_link")%></th>
       		<th><%=t("ext_static_content_visible")%></th>
+      		<th><%=t("ext_static_content_show_in")%></th>
       		<th><%=t("action")%></th>
     	</tr>
   	</thead>
@@ -23,6 +24,12 @@
 			<td>
 			  <%= page.visible %>
 			</td>
+            <td>
+              <%= page.show_in_sidebar ? t('ext_static_content_show_in_sidebar') + "," : "" %>
+              <%= page.show_in_header ? t('ext_static_content_show_in_header') + "," : "" %>
+              <%= page.show_in_footer ? t('ext_static_content_show_in_footer') + "," : "" %>
+              <%= page.show_in_help_navigation ? t('ext_static_content_show_in_help_navigation') + "," : "" %>
+            </td>
 			<td>
 	          <%=link_to t("edit"), edit_object_url(page) %> |
               <%=link_to t("ext_static_content_new_sub_page"), admin_new_sub_url(page.id) %> |

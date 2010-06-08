@@ -9,10 +9,11 @@ de-CH:
     ext_static_content_new_page: Neue Seite
     ext_static_content_editing_page: Seite bearbeiten
     ext_static_content_foreign_link: Externer Link (URL)
-    ext_static_content_show_in_sidebar: In der Sidebar anzeigen
-    ext_static_content_show_in_header: Im Header anzeigen
-    ext_static_content_show_in_footer: Im Footer anzeigen
-    ext_static_content_show_in_help_navigation: In der Hilfsnavigation anzeigen
+    ext_static_content_show_in: Anzeigen in
+    ext_static_content_show_in_sidebar: Sidebar
+    ext_static_content_show_in_header: Header
+    ext_static_content_show_in_footer: Footer
+    ext_static_content_show_in_help_navigation: Hilfsnavigation
     ext_static_content_position: Position
     ext_static_content_visible: Sichtbar
     ext_static_content_confirm_delete: Bist du sicher?
@@ -22,3 +23,5 @@ de-CH:
     ext_static_content_meta_description: Meta-Beschreibung
     ext_static_content_layout: Layout
     ext_static_content_new_sub_page: Unterseite hinzuf&uuml;gen
+    ext_static_content_root_page: Ist Hauptseite
+    ext_static_content_root_page: Hauptseite
