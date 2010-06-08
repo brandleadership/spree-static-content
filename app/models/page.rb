@@ -1,7 +1,8 @@
 class Page < ActiveRecord::Base
   default_scope :order => "position ASC"
 
-  has_many :pages
+  has_many :pages, :dependent => :destroy
+  belongs_to :page
 
   validates_presence_of :title
   validates_presence_of :body, :if => :not_using_foreign_link?
@@ -11,6 +12,7 @@ class Page < ActiveRecord::Base
   named_scope :header_links, :conditions => ["show_in_header = ?", true], :order => 'position'
   named_scope :footer_links, :conditions => ["show_in_footer = ?", true], :order => 'position'
   named_scope :sidebar_links,:conditions => ["show_in_sidebar = ?", true], :order => 'position'
+  named_scope :help_links,   :conditions => ["show_in_help_navigation = ?", true], :order => 'position'
   
   named_scope :visible, :conditions => {:visible => true}
 
