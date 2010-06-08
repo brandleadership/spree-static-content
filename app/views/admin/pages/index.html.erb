@@ -12,8 +12,9 @@
 	
 	<tbody>
     	<% sorted_pages.each do |page| %>
-		<tr class="<%= cycle('even', 'odd') %>">
+		<tr class="<%= cycle('even', 'odd') %> <%= page.root_page ? "root_page" : "" %>">
 			<td>
+                <%=page.root_page ? t('ext_static_content_root_page') + ":" : "" %>
 				<%= page.title %>
 			</td>
 			<td>
