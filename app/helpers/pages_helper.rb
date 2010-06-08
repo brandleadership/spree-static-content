@@ -1,15 +1,15 @@
 module PagesHelper
 
   def static_content_sidebar
-    Page.sidebar_links
+    Page.visible.sidebar_links
   end
 
   def static_content_help_navigation
-    Page.help_links
+    Page.visible.help_links
   end
 
   def static_content_root_page
-    Page.find_by_root_page(true)
+    Page.visible.find_by_root_page(true)
   end
 
   def static_content_current_page?(page)
