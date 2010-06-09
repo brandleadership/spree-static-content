@@ -1,4 +1,5 @@
 class Page < ActiveRecord::Base
+
   default_scope :order => "position ASC"
 
   has_one :parent_page, :foreign_key => 'parent_page_id', :class_name => 'Page'
@@ -48,7 +49,8 @@ class Page < ActiveRecord::Base
     Page.find(:all, :conditions => ["parent_page_id = ?", self.id])
   end
 
-private
+  private
+
   def not_using_foreign_link?
     foreign_link.blank?
   end
@@ -63,6 +65,7 @@ private
 
   def normalize(slug_text)
     return '' if slug_text.nil? || slug_text == ''
+
     slug_text.
       gsub(/[\W]/u, ' ').
       strip.
@@ -71,4 +74,5 @@ private
       downcase.
       to_s
   end
+
 end
