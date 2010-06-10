@@ -49,7 +49,40 @@ class Page < ActiveRecord::Base
     Page.find(:all, :conditions => ["parent_page_id = ?", self.id])
   end
 
+  #
+  # Localize attributes
+  #
+  def method_missing(method, *arguments, &block)
+    if localizable?(method)
+      localize method
+    else
+      super method, *arguments, &block
+    end
+  end
+
   private
+
+  #
+  # Returns the translated content for the given attribute or the default if not found
+  #
+  def localize(attr)
+    self.attributes[attr.to_s + '_' + locale(I18n.locale)] || self.attributes[attr.to_s + '_' + locale(I18n.default_locale)]
+  end
+
+  #
+  # Does the method match a localizable attribute or the default
+  #
+  def localizable?(attr)
+    self.attributes.has_key?(attr.to_s + '_' + locale(I18n.locale)) || self.attributes.has_key?(attr.to_s + '_' + locale(I18n.default_locale))
+  rescue NoMethodError
+    return false
+  end
+
+  def locale(locale)
+    locale = locale.to_s
+
+    locale.tr('-','_')
+  end
 
   def not_using_foreign_link?
     foreign_link.blank?
