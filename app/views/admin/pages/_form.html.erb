@@ -37,8 +37,8 @@
             $('.entry-'+this.value).each(function(){
                 $(this).show();
             });
-            $('#content').prepend('<div class="flash notice">Language changed</div>');
-            $('.flash').fadeOut('slow', function(){
+            $('#content').prepend('<div class="flash notice"><%=t('ext_static_content_language_changed')%></div>');
+            $('.flash').fadeOut(2000, function(){
                 $('.flash').remove();
             });
         });

@@ -25,3 +25,5 @@ en-US:
     ext_static_content_new_sub_page: Add sub page
     ext_static_content_root_page: Is root page
     ext_static_content_root_page: Root page
+    ext_static_content_language_changed: Language switched
+    ext_static_content_language_switcher: Shown language
