@@ -67,14 +67,14 @@ class Page < ActiveRecord::Base
   # Returns the translated content for the given attribute or the default if not found
   #
   def localize(attr)
-    self.attributes[attr.to_s + '_' + normalize_locale(I18n.normalize_locale)] || self.attributes[attr.to_s + '_' + normalize_locale(I18n.default_locale)]
+    self.attributes[attr.to_s + '_' + normalize_locale(I18n.locale)] || self.attributes[attr.to_s + '_' + normalize_locale(I18n.default_locale)]
   end
 
   #
   # Does the method match a localizable attribute or the default
   #
   def localizable?(attr)
-    self.attributes.has_key?(attr.to_s + '_' + normalize_locale(I18n.normalize_locale)) || self.attributes.has_key?(attr.to_s + '_' + normalize_locale(I18n.default_locale))
+    self.attributes.has_key?(attr.to_s + '_' + normalize_locale(I18n.locale)) || self.attributes.has_key?(attr.to_s + '_' + normalize_locale(I18n.default_locale))
   rescue NoMethodError
     return false
   end
