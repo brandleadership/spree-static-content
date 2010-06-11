@@ -23,10 +23,38 @@
         lang: '<%= I18n.locale.to_s.split("-").first %>'
       });
     });
+    $j(function(){
+        $('.language-variants').each(function(){
+            $(this).hide();
+        });
+        $('.entry-<%=I18n.locale%>').each(function(){
+            $(this).show();    
+        });
+        $('#language_switch_selector').change(function(){
+            $('.language-variants').each(function(){
+                $(this).hide();
+            });
+            $('.entry-'+this.value).each(function(){
+                $(this).show();
+            });
+            $('#content').prepend('<div class="flash notice">Language changed</div>');
+            $('.flash').fadeOut('slow', function(){
+                $('.flash').remove();
+            });
+        });
+    });
 
   </script>
 <% end %>
 <table class="admin-report" width="545">
+  <tr>
+    <td>
+      <%=t('ext_static_content_language_switcher')%>
+    </td>
+    <td>
+      <%= select :language_switch, :selector, AVAILABLE_LOCALES.map{|u| [u.second, u.first]}, {:selected => I18n.locale.to_s} %>
+    </td>
+  </tr>
   <tr>
     <td valign="top"><%=t("ext_static_content_title")%>:</td>
     <td><%= f.text_field :title, {"style" => "width:500px"} %></td>
@@ -41,7 +69,13 @@
   </tr>
   <tr>
     <td valign="top"><%=t("ext_static_content_body")%>:</td>
-    <td><%= f.text_area :body, {"style" => "width:500px", "class"=> "wymeditor"} %> </td>
+    <td>
+      <% AVAILABLE_LOCALES.each_key do |lang| %>
+        <div class="language-variants entry-<%=lang %>">
+          <%= f.text_area "body_#{normalize_locale(lang)}".to_sym, {"style" => "width:500px", "class"=> "wymeditor"} %>
+        </div>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td valign="top"><%=t("ext_static_content_foreign_link")%>:</td>
