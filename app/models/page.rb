@@ -7,7 +7,7 @@ class Page < ActiveRecord::Base
   has_one :page, :through => :parent_page
 
   validates_presence_of ("title_"+I18n.default_locale.to_s).to_sym
-  #validates_presence_of :body, :if => :not_using_foreign_link?
+  validates_presence_of ("body_"+I18n.default_locale.to_s).to_sym, :if => :not_using_foreign_link?
 
   validates_uniqueness_of :root_page, :if => :root_page
   
