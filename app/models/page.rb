@@ -50,6 +50,13 @@ class Page < ActiveRecord::Base
     Page.find(:all, :conditions => ["parent_page_id = ?", self.id])
   end
 
+  def sub_pages?
+    if not Page.find(:all, :conditions => ["parent_page_id = ?", self.id]).empty?
+      return true
+    end
+    false
+  end
+
   #
   # Localize attributes
   #
