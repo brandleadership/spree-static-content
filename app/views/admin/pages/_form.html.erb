@@ -57,7 +57,13 @@
   </tr>
   <tr>
     <td valign="top"><%=t("ext_static_content_title")%>:</td>
-    <td><%= f.text_field :title, {"style" => "width:500px"} %></td>
+    <td>
+      <% AVAILABLE_LOCALES.each_key do |lang| %>
+        <div class="language-variants entry-<%=lang %>">
+          <%= f.text_field "title_#{normalize_locale(lang)}".to_sym, {"style" => "width:500px"} %>
+        </div>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td valign="top"><%=t("ext_static_content_slug")%>:</td>
