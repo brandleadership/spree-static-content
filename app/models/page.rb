@@ -6,7 +6,7 @@ class Page < ActiveRecord::Base
   has_one :parent_page, :foreign_key => 'parent_page_id', :class_name => 'Page'
   has_one :page, :through => :parent_page
 
-  validates_presence_of :title
+  validates_presence_of ("title_"+I18n.default_locale.to_s).to_sym
   #validates_presence_of :body, :if => :not_using_foreign_link?
 
   validates_uniqueness_of :root_page, :if => :root_page
@@ -91,7 +91,7 @@ class Page < ActiveRecord::Base
   end
 
   def slug_link
-    ensure_slash_prefix normalize(title)
+    ensure_slash_prefix normalize(self.send(("title_"+I18n.default_locale.to_s).to_sym))
   end
   
   def ensure_slash_prefix(str)
