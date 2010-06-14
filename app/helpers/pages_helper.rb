@@ -9,7 +9,9 @@ module PagesHelper
   end
 
   def static_content_root_page
-    Page.visible.find_by_root_page(true)
+    page = Page.visible.find_by_root_page(true)
+
+    page == nil ? Page.new : page
   end
 
   def static_content_current_page?(page)
