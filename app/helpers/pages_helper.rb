@@ -15,11 +15,11 @@ module PagesHelper
   end
 
   def static_content_current_page?(page)
-    page.slug.eql?request.env["PATH_INFO"]
+    page.link.eql?request.env["PATH_INFO"]
   end
 
   def static_content_current_page_in_path?(page)
-    request.env["PATH_INFO"].include?page.slug
+    request.env["PATH_INFO"].include?page.link
   end
 
 end
