@@ -23,6 +23,8 @@
         lang: '<%= I18n.locale.to_s.split("-").first %>'
       });
     });
+
+    // js for the language switcher
     $j(function(){
         $('.language-variants').each(function(){
             $(this).hide();
@@ -41,6 +43,26 @@
             $('.flash').fadeOut(2000, function(){
                 $('.flash').remove();
             });
+        });
+    });
+
+    // js for link to shop
+    $j(function(){
+        if($('#page_link_to_shop:checked').length>0){
+            $('.not_for_link_to_shop').each(function(){
+                $(this).hide();
+            });
+        }
+        $('#page_link_to_shop').change(function(){
+            if($(this).is(':checked')){
+                $('.not_for_link_to_shop').each(function(){
+                    $(this).hide();
+                });
+            }else{
+                $('.not_for_link_to_shop').each(function(){
+                    $(this).show();
+                });
+            }
         });
     });
 
@@ -65,7 +87,7 @@
       <% end %>
     </td>
   </tr>
-  <tr>
+  <tr class="not_for_link_to_shop">
     <td valign="top"><%=t("ext_static_content_slug")%>:</td>
     <% if @parent_page %>
         <td><%= f.text_field :slug, {"style" => "width:500px", "readonly" => "readonly", :value => @parent_page.slug+"/..."} %></td>
@@ -73,7 +95,7 @@
         <td><%= f.text_field :slug, {"style" => "width:500px", "readonly" => "readonly"} %></td>
     <% end %>
   </tr>
-  <tr>
+  <tr class="not_for_link_to_shop">
     <td valign="top"><%=t("ext_static_content_body")%>:</td>
     <td>
       <% AVAILABLE_LOCALES.each_key do |lang| %>
@@ -83,15 +105,15 @@
       <% end %>
     </td>
   </tr>
-  <tr>
+  <tr class="not_for_link_to_shop">
     <td valign="top"><%=t("ext_static_content_foreign_link")%>:</td>
     <td><%= f.text_field :foreign_link, {"style" => "width:500px"} %></td>
   </tr>
-  <tr>
+  <tr class="not_for_link_to_shop">
     <td valign="top"><%=t("ext_static_content_meta_keywords")%>:</td>
     <td><%= f.text_field :meta_keywords, {"style" => "width:500px"} %></td>
   </tr>
-  <tr>
+  <tr class="not_for_link_to_shop">
     <td valign="top"><%=t("ext_static_content_meta_description")%>:</td>
     <td><%= f.text_field :meta_description, {"style" => "width:500px"} %></td>
   </tr>
@@ -112,7 +134,7 @@
     <td valign="top"><%=t("ext_static_content_show_in")%> <%=t("ext_static_content_show_in_help_navigation")%>:</td>
     <td><%= f.check_box :show_in_help_navigation %></td>
   </tr>
-  <tr>
+  <tr class="not_for_link_to_shop">
     <td valign="top"><%=t("ext_static_content_root_page")%>:</td>
     <td><%= f.check_box :root_page %></td>
   </tr>
