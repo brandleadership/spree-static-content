@@ -149,7 +149,13 @@
   </tr>
   <tr>
     <td valign="top"><%=t("ext_static_content_layout")%>:</td>
-    <td><%= f.text_field :layout %></td>
+    <td>
+      <% unless available_layouts.empty? %>
+        <%= f.select :layout, available_layouts %>
+      <% else %>
+        <%= f.text_field :layout %>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td valign="top"><%=t("ext_static_content_visible")%>:</td>
