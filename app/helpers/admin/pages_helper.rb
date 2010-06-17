@@ -19,8 +19,7 @@ module Admin::PagesHelper
   #
   def available_layouts
     layouts = Array.new
-    extensions = Dir.entries(RAILS_ROOT + '/vendor/extensions/').select{|f| f unless (File.directory?f or File.file?f) }
-    extensions.each do |ext|
+    Dir.entries(RAILS_ROOT + '/vendor/extensions/').select{|f| f unless (File.directory?f or File.file?f) }.each do |ext|
       Dir.entries("#{RAILS_ROOT}/vendor/extensions/#{ext}/app/views/layouts").select{|f| f if f.length > 2 }.collect{|e| layouts << e.scan(/\w+/).first} if File.exist?("#{RAILS_ROOT}/vendor/extensions/#{ext}/app/views/layouts")
     end
 
