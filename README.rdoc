@@ -5,13 +5,7 @@ Good, clean content management of pages for Spree.  You can use this to:
 - Add and manage static pages such as an 'About' page.
 - Show a static page instead of existing dynamic pages such as the home page,
   products pages, and taxon pages.
-  
-To override a dynamic page, use the path of that dynamic page as the slug when
-you create your page in the Spree Administration area, including the
-leading slash.  For example:
 
-- to override the home page, use a path of '/' (without quotes).
-- to override a product page, use its path, e.g. '/products/apache-baseball-jersey' (without quotes). 
 
 The dynamic page can be made available again if you delete the static page or change its slug.
 
@@ -41,3 +35,13 @@ Add this to your environment.rb inside the
 
 ===
   config.extensions = [:localization, :static_content, :all]
+
+
+== Important before installation
+
+AVAILABLE_LOCALES must be set with only the needed languages and a default language must be definied
+
+== Using view templates as content
+
+Create in app/view a folder named static_content_templates and insert their your templates.
+They automatically appear in when you edit a page in the admin section of spree. 
