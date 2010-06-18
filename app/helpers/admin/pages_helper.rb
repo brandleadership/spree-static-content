@@ -36,7 +36,7 @@ module Admin::PagesHelper
     templates = Hash.new
     extension_dirs.each do |ext|
       ext_dir = "#{RAILS_ROOT}/vendor/extensions/#{ext}/app/views/static_content_templates"
-      Dir.entries(ext_dir).only_files.collect{ |e| templates[e] = 'static_content_templates/' + e } if File.exist?(ext_dir)
+      Dir.entries(ext_dir).only_files.collect{ |e| templates[e] = 'static_content_templates/' + e[1..e.length] } if File.exist?(ext_dir)
     end
 
     templates
