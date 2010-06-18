@@ -26,17 +26,17 @@ module Admin::PagesHelper
   def available_layouts
     layouts = Array.new
     extension_dirs.each do |ext|
-      Dir.entries("#{RAILS_ROOT}/vendor/extensions/#{ext}/app/views/layouts").only_files.collect{|e| layouts << e.scan(/\w+/).first} if File.exist?("#{RAILS_ROOT}/vendor/extensions/#{ext}/app/views/layouts")
+      Dir.entries("#{RAILS_ROOT}/vendor/extensions/#{ext}/app/views/layouts").only_files.collect{ |e| layouts << e.scan(/\w+/).first } if File.exist?("#{RAILS_ROOT}/vendor/extensions/#{ext}/app/views/layouts")
     end
 
     layouts
   end
 
   def available_templates
-    templates = Array.new
+    templates = Hash.new
     extension_dirs.each do |ext|
       ext_dir = "#{RAILS_ROOT}/vendor/extensions/#{ext}/app/views/static_content_templates"
-      Dir.entries(ext_dir).only_files.collect{|e| templates << ext_dir + '/' + e} if File.exist?(ext_dir)
+      Dir.entries(ext_dir).only_files.collect{ |e| templates[e] = 'static_content_templates/' + e } if File.exist?(ext_dir)
     end
 
     templates

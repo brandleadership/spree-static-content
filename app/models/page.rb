@@ -38,6 +38,8 @@ class Page < ActiveRecord::Base
 
     self.foreign_link = '/products' if self.link_to_shop
 
+    self.template = nil if self.template.empty?
+
   end
 
   def link

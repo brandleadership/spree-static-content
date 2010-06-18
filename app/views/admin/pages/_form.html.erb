@@ -157,6 +157,12 @@
       <% end %>
     </td>
   </tr>
+  <% unless available_templates.empty? %>
+    <tr>
+      <td valign="top"><%=t("ext_static_content_template")%>:</td>
+      <td><%= f.select :template, available_templates, {:include_blank => true} %></td>
+    </tr>
+  <% end %>
   <tr>
     <td valign="top"><%=t("ext_static_content_visible")%>:</td>
     <td><%= f.check_box :visible, { :checked => 'checked' } %></td>

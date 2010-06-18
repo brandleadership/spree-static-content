@@ -29,9 +29,17 @@ class StaticContentExtension < Spree::Extension
 
         if @page = Page.visible.find_by_slug(request.path)
           if @page.layout && !@page.layout.empty?
-            render :template => 'static_content/show', :layout => @page.layout
+            if @page.template
+              render :template => 'static_content/show_template', :layout => @page.layout
+            else
+              render :template => 'static_content/show', :layout => @page.layout
+            end
           else
-            render :template => 'static_content/show'
+            if @page.template
+              render :template => 'static_content/show_template'
+            else
+              render :template => 'static_content/show'
+            end
           end
         else
           Rails.cache.write('page_not_exist/'+request.path, true)
