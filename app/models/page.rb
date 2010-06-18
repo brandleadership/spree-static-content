@@ -7,7 +7,7 @@ class Page < ActiveRecord::Base
   has_one :page, :through => :parent_page
 
   validates_presence_of ("title_"+I18n.default_locale.to_s).to_sym
-  validates_presence_of ("body_"+I18n.default_locale.to_s).to_sym, :if => :not_using_foreign_or_shop_link?
+  validates_presence_of ("body_"+I18n.default_locale.to_s).to_sym, :if => :body_needed?
 
   validates_uniqueness_of :root_page, :if => :root_page
   
@@ -90,8 +90,8 @@ class Page < ActiveRecord::Base
     return false
   end
 
-  def not_using_foreign_or_shop_link?
-    foreign_link.blank? && link_to_shop.blank?
+  def body_needed?
+    foreign_link.blank? && link_to_shop.blank? && template.blank?
   end
 
   def slug_link
