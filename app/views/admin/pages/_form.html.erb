@@ -66,6 +66,26 @@
         });
     });
 
+    // js for page_template
+    $j(function(){
+        if($('#page_template').val() != ''){
+            $('.not_for_template').each(function(){
+                $(this).hide();
+            });
+        }
+        $('#page_template').change(function(){
+            if($('#page_template :selected').text() != ''){
+                $('.not_for_template').each(function(){
+                    $(this).hide();
+                });
+            }else{
+                $('.not_for_template').each(function(){
+                    $(this).show();
+                });
+            }
+        });
+    });
+
   </script>
 <% end %>
 <table class="admin-report" width="545">
@@ -95,7 +115,7 @@
         <td><%= f.text_field :slug, {"style" => "width:500px", "readonly" => "readonly"} %></td>
     <% end %>
   </tr>
-  <tr class="not_for_link_to_shop">
+  <tr class="not_for_link_to_shop not_for_template">
     <td valign="top"><%=t("ext_static_content_body")%>:</td>
     <td>
       <% AVAILABLE_LOCALES.each_key do |lang| %>
