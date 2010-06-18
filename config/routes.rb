@@ -1,4 +1,5 @@
 # Put your extension routes here.
+map.root :controller => "static_content", :action => "index"
 
 map.namespace :admin do |admin|
   admin.resources :pages
