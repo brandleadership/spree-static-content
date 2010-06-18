@@ -1,25 +1,5 @@
-- content_for :head do
+= render 'static_content/head'
 
-  %meta{:name => "title", :content => @page.title}
-
-  - if @page.attribute_present? :meta_keywords
-    %meta{:name => "keywords", :content => @page.meta_keywords}
-
-  - if @page.attribute_present? :meta_description
-    %meta{:name => "description", :content => @page.meta_description}
-
-- content_for :sidebar do
-  - if "products" == @current_controller && @taxon
-    = render :partial => "shared/filters"
-  - else
-    = render :partial => "shared/taxonomies"
-
-- content_for :title do
-  = t('shop_name')
-  |
-  = @page.title
-
-%h2
-  =@page.title
+= render 'static_content/title'
 
 =@page.body
