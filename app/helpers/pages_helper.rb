@@ -22,4 +22,8 @@ module PagesHelper
     request.env["PATH_INFO"].include?page.link
   end
 
+  def static_content_search(params)
+    Page.search(params)
+  end
+
 end
