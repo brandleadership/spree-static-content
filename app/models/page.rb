@@ -61,6 +61,20 @@ class Page < ActiveRecord::Base
     false
   end
 
+  def self.search(search)
+    search_condition = "%" + search + "%"
+    search_string = ""
+    additional = ""
+
+    AVAILABLE_LOCALES.each do |lang|
+      lang_normal = lang.first.tr('-','_')
+      search_string = search_string + "#{additional}title_#{lang_normal} LIKE ? OR body_#{lang_normal} LIKE ?"
+      additional = " OR "
+    end
+
+    find(:all, :conditions => [search_string, search_condition, search_condition, search_condition, search_condition]) # TODO: search conditions must be added dynamically
+  end
+
   #
   # Localize attributes
   #
