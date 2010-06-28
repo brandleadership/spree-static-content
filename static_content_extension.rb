@@ -8,6 +8,11 @@ class StaticContentExtension < Spree::Extension
 
   def activate
 
+    OrdersController.class_eval do
+      # PagesHelper for navigation etc. available during checkout process
+      helper PagesHelper
+    end
+
     Spree::BaseController.class_eval do
       # PagesHelper for navigations etc.
       helper PagesHelper
