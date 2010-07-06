@@ -32,4 +32,8 @@ module PagesHelper
     true
   end
 
+  def site_title
+    Spree::Config[:site_name]
+  end
+
 end
