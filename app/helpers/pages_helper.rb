@@ -26,4 +26,10 @@ module PagesHelper
     Page.search(params)
   end
 
+  def in_shop?
+    false if Page.find_by_link(request.env["PATH_INFO"])
+  rescue
+    true
+  end
+
 end
