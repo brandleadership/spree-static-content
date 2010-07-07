@@ -5,6 +5,7 @@ class StaticContentController < Spree::BaseController
     unless @page = Page.visible.find_by_slug(root_slug)
       render :file => "#{RAILS_ROOT}/public/404.html", :layout => false, :status => 404
     end
+    render :layout => @page.layout if @page.layout && !@page.layout.empty?
   end
   
   def show
