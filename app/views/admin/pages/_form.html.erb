@@ -3,7 +3,6 @@
   <%= javascript_include_tag 'jquery/jquery.js' %>
   <%= javascript_include_tag 'wymeditor/jquery.wymeditor.js' %>
 
-
   <script type="text/javascript" charset="utf-8">
 
     var $j = jQuery.noConflict();
@@ -85,6 +84,23 @@
             }
         });
     });
+
+    /*
+       This code is from the example http://github.com/ryanb/complex-form-examples 
+     */
+    function insert_fields(link, method, content) {
+      var new_id = new Date().getTime();
+      var regexp = new RegExp("new_" + method, "g");
+      $(link).before(content.replace(regexp, new_id));
+    }
+
+    function remove_fields(link) {
+      var hidden_field = $(link).prev("input[type=hidden]");
+      if (hidden_field) {
+        hidden_field.value = '1';
+      }
+      $(link).parent(".fields").hide();
+    }
 
   </script>
 <% end %>
@@ -187,25 +203,13 @@
     <td valign="top"><%=t("ext_static_content_visible")%>:</td>
     <td><%= f.check_box :visible, { :checked => 'checked' } %></td>
   </tr>
-  
   <tr>
     <td valign="top"><%=t("ext_static_content_page_assets")%>:</td>
     <td>
       <% f.fields_for :page_assets do |asset| %>
-        <%= asset.label :description, t("ext_static_content_page_assets_description") %>
-        <%= asset.text_field :description %>
-        <% unless asset.object.new_record? %>
-            <%= asset.check_box '_delete' %>
-            <%= asset.label '_delete', 'Remove' %>
-            <br/>
-            <%= image_tag asset.object.attachment.url(:small) %>
-            <br />
-        <% end %>
-        <br/>
-        <%= asset.label :attachment, "attachment" %>
-        <%= asset.file_field :attachment %>
-        <br />
+        <%= render :partial => 'page_asset', :locals => { :f => asset } %>
       <% end %>
+      <%= add_child_link "New asset", f, :page_assets %>
     </td>
   </tr>
 </table>
