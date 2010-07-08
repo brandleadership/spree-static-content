@@ -1,2 +1,3 @@
-%h2
-  =@page.title
+- unless @page.hide_title
+  %h2
+    =@page.title
