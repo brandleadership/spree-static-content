@@ -209,7 +209,7 @@
       <% f.fields_for :page_assets do |asset| %>
         <%= render :partial => 'page_asset', :locals => { :f => asset } %>
       <% end %>
-      <%= add_child_link "New asset", f, :page_assets %>
+      <%= add_child_link t('ext_static_content_page_assets_add'), f, :page_assets %>
     </td>
   </tr>
 </table>
