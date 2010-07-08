@@ -187,4 +187,25 @@
     <td valign="top"><%=t("ext_static_content_visible")%>:</td>
     <td><%= f.check_box :visible, { :checked => 'checked' } %></td>
   </tr>
+  
+  <tr>
+    <td valign="top"><%=t("ext_static_content_page_assets")%>:</td>
+    <td>
+      <% f.fields_for :page_assets do |asset| %>
+        <%= asset.label :description, t("ext_static_content_page_assets_description") %>
+        <%= asset.text_field :description %>
+        <% unless asset.object.new_record? %>
+            <%= asset.check_box '_delete' %>
+            <%= asset.label '_delete', 'Remove' %>
+            <br/>
+            <%= image_tag asset.object.attachment.url(:small) %>
+            <br />
+        <% end %>
+        <br/>
+        <%= asset.label :attachment, "attachment" %>
+        <%= asset.file_field :attachment %>
+        <br />
+      <% end %>
+    </td>
+  </tr>
 </table>

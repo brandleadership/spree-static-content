@@ -1,6 +1,6 @@
 class Admin::PagesController < Admin::BaseController
-  resource_controller
-  
+  resource_controller  
+    
   update.response do |wants|
     wants.html { redirect_to collection_url }
   end
@@ -18,7 +18,23 @@ class Admin::PagesController < Admin::BaseController
     Rails.cache.delete('page_not_exist/'+@page.slug)
   end
 
+  edit.before do
+    @page.page_assets.build if @page.page_assets.empty? 
+  end
+
+  new_action.before do
+    @page.page_assets.build
+  end
+
+  destroy.before do
+    @page.page_assets.each do |attach|
+      # Delete the files from the file system
+      attach.attachment.destroy
+    end
+  end
+
   def new_sub
     @parent_page = Page.find(params[:id])
   end
+  
 end

@@ -6,6 +6,9 @@ class Page < ActiveRecord::Base
   has_one :parent_page, :foreign_key => 'parent_page_id', :class_name => 'Page'
   has_one :page, :through => :parent_page
 
+  has_many :page_assets, :dependent => :delete_all
+  accepts_nested_attributes_for :page_assets, :allow_destroy => true
+
   validates_presence_of ("title_"+I18n.default_locale.to_s).to_sym
   validates_presence_of ("body_"+I18n.default_locale.to_s).to_sym, :if => :body_needed?
 
@@ -22,6 +25,7 @@ class Page < ActiveRecord::Base
     super(*args)
     last_page = Page.last
     self.position = last_page ? last_page.position + 1 : 0
+    self.build_page_assets unless self.page_assets
   end
 
   def before_save
